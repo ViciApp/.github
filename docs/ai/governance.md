@@ -2,16 +2,16 @@
 
 ## Paths with an owner
 
-`.github/CODEOWNERS` gives every path to one owner (`* @AntonioVentilii`). The org `baseline` ruleset asks for code owner review, resolved review threads and a Copilot review on every pull request to `main`, and allows squash merges only. This repository's own `merge-queue` ruleset puts every merge through the queue.
+`.github/CODEOWNERS` gives every path to one owner (`* @AntonioVentilii`). The org `baseline` ruleset asks for code owner review, resolved review threads and a Copilot review on every pull request to `main`, and allows squash merges only. This repository's own `merge-queue` ruleset puts every merge through the queue and requires the `workflows` check from `lint.yml`.
 
-| Path                                               | Rule                                                                                                                                                                                    |
-| -------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `.github/workflows/pull-request.yml`               | Runs on every ViciApp pull request the moment it merges. Ask before changing; never weaken a check, the `pass` gate or its `needs` list. Never rename the `pass` job.                   |
-| `.github/workflows/pr-checks.yml`                  | This repository's own caller. Keep it in step with the callers in the other repositories (same triggers, same permissions); its job id `pr-checks` is half of the required status name. |
-| `.github/workflows/lint.yml`, `.github/zizmor.yml` | The workflow lint for this repository only. Bump a pinned version freely when both tools pass; ask before ignoring a finding, and give every ignore its reason in a comment.            |
-| `.github/CODEOWNERS`                               | Decides who reviews what. Ask before changing.                                                                                                                                          |
-| `profile/README.md`                                | Public: it is the org's front page on GitHub. Ask before changing what it says about the product.                                                                                       |
-| The rulesets                                       | Live in the org and repository settings, not in this repository. Changing them (required checks, merge queue, merge methods) is the owner's call, never part of a pull request here.    |
+| Path                                               | Rule                                                                                                                                                                                                                                           |
+| -------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `.github/workflows/pull-request.yml`               | Runs on every ViciApp pull request the moment it merges. Ask before changing; never weaken a check, the `pass` gate or its `needs` list. Never rename the `pass` job.                                                                          |
+| `.github/workflows/pr-checks.yml`                  | This repository's own caller. Keep it in step with the callers in the other repositories (same triggers, same permissions); its job id `pr-checks` is half of the required status name.                                                        |
+| `.github/workflows/lint.yml`, `.github/zizmor.yml` | The workflow lint for this repository only. Never rename the `workflows` job: it is the required status name. Bump a pinned version freely when both tools pass; ask before ignoring a finding, and give every ignore its reason in a comment. |
+| `.github/CODEOWNERS`                               | Decides who reviews what. Ask before changing.                                                                                                                                                                                                 |
+| `profile/README.md`                                | Public: it is the org's front page on GitHub. Ask before changing what it says about the product.                                                                                                                                              |
+| The rulesets                                       | Live in the org and repository settings, not in this repository. Changing them (required checks, merge queue, merge methods) is the owner's call, never part of a pull request here.                                                           |
 
 ## Without asking, and not
 
