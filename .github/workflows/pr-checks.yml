@@ -1,0 +1,22 @@
+# Runs the shared pull request rules from this repository's own copy, so a change to them is
+# tested on the pull request that makes it. The org ruleset requires `pr-checks / pass`.
+name: PR Checks
+
+on:
+  pull_request:
+    types: [opened, edited, reopened, synchronize]
+  merge_group:
+
+permissions: {}
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.run_id }}
+  cancel-in-progress: true
+
+jobs:
+  pr-checks:
+    uses: ./.github/workflows/pull-request.yml
+    permissions:
+      actions: read
+      contents: read
+      pull-requests: read
