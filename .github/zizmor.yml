@@ -1,0 +1,7 @@
+# zizmor reads this file on its own, locally and in lint.yml.
+rules:
+  self-repository:
+    ignore:
+      # zizmor asks for the `$/` self-repository syntax, but actionlint (1.7.12, the latest) rejects
+      # it in a reusable workflow call. Drop this once actionlint accepts it.
+      - pr-checks.yml

@@ -2,13 +2,14 @@
 
 The repository is small and every folder has a meaning GitHub gives it, so a new file almost always belongs in one of these.
 
-| Path                     | What lives there                                                                                   | Who reads it                                                 |
-| ------------------------ | -------------------------------------------------------------------------------------------------- | ------------------------------------------------------------ |
-| `profile/README.md`      | The org profile                                                                                    | GitHub, on github.com/ViciApp                                |
-| `.github/workflows/`     | `pull-request.yml` (reusable, `workflow_call` only) and `pr-checks.yml` (this repository's caller) | Every ViciApp repository's `pr-checks.yml`, and Actions here |
-| `.github/CODEOWNERS`     | Review ownership                                                                                   | GitHub, for this repository only                             |
-| `docs/ai/`               | These agent docs                                                                                   | Agents and people changing this repository                   |
-| `AGENTS.md`, `CLAUDE.md` | The entry point and its Claude Code pointer                                                        | Agents                                                       |
+| Path                     | What lives there                                                                                                                                 | Who reads it                                                 |
+| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------ |
+| `profile/README.md`      | The org profile                                                                                                                                  | GitHub, on github.com/ViciApp                                |
+| `.github/workflows/`     | `pull-request.yml` (reusable, `workflow_call` only), `pr-checks.yml` (this repository's caller) and `lint.yml` (this repository's workflow lint) | Every ViciApp repository's `pr-checks.yml`, and Actions here |
+| `.github/zizmor.yml`     | zizmor's configuration                                                                                                                           | zizmor, locally and in `lint.yml`                            |
+| `.github/CODEOWNERS`     | Review ownership                                                                                                                                 | GitHub, for this repository only                             |
+| `docs/ai/`               | These agent docs                                                                                                                                 | Agents and people changing this repository                   |
+| `AGENTS.md`, `CLAUDE.md` | The entry point and its Claude Code pointer                                                                                                      | Agents                                                       |
 
 ## Where new things go
 
