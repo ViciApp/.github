@@ -108,7 +108,10 @@ jobs:
           echo "Release PR #$pr is current with $base_branch."
 
   pass:
-    if: always()
+    # Not always(): when the caller's concurrency cancels a superseded run, this job would still
+    # run, read the cancelled checks as failures and leave a red `pr-checks / pass` on the same
+    # commit as the newer run's green one, blocking the PR.
+    if: ${{ !cancelled() }}
     needs: ['title', 'not-empty', 'release-fresh']
     runs-on: ubuntu-24.04
     permissions: {}
