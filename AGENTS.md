@@ -13,10 +13,10 @@ Callers pin `@main`, so a change merged here applies to every ViciApp pull reque
 
 ## Commands
 
-There is no package manifest and no build. The local gates for a workflow change:
+There is no package manifest and no build. The gates for a workflow change, which `lint.yml` also runs on every pull request at the versions it pins:
 
 - `actionlint`: syntax and expression checks for the workflows
-- `zizmor .github/workflows`: security audit (permissions, pinning, injection)
+- `zizmor .`: security audit (permissions, pinning, injection), configured by `.github/zizmor.yml`
 
 Nothing to run for a change that only touches Markdown.
 
@@ -24,6 +24,8 @@ Nothing to run for a change that only touches Markdown.
 
 - `.github/workflows/pull-request.yml`: the shared rules, triggered only by `workflow_call`. Jobs `title`, `not-empty`, `release-fresh` (merge queue only) and the aggregator `pass`.
 - `.github/workflows/pr-checks.yml`: this repository's own caller. It runs the local copy (`uses: ./.github/workflows/pull-request.yml`), so a change to the rules is tested on the pull request that makes it.
+- `.github/workflows/lint.yml`: runs actionlint and zizmor on this repository's workflows. Not part of the shared checks.
+- `.github/zizmor.yml`: zizmor's configuration, each ignore with its reason.
 - `.github/CODEOWNERS`: one owner for every path.
 - `profile/README.md`: the public org profile.
 - `docs/ai/`: these agent docs.

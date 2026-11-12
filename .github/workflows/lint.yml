@@ -1,0 +1,41 @@
+# Lints this repository's workflows on every pull request. Every ViciApp repository runs
+# pull-request.yml from main, so a broken expression or an unsafe pattern here would reach all of
+# them at once; this catches it on the pull request that introduces it.
+name: Lint
+
+on:
+  pull_request:
+    types: [opened, reopened, synchronize]
+  merge_group:
+
+permissions: {}
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.run_id }}
+  cancel-in-progress: true
+
+jobs:
+  workflows:
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      # The image bundles shellcheck, so the run: scripts are checked too.
+      - name: actionlint
+        uses: docker://rhysd/actionlint:1.7.12@sha256:b1934ee5f1c509618f2508e6eb47ee0d3520686341fec936f3b79331f9315667
+        with:
+          args: -color
+
+      - name: zizmor
+        uses: zizmorcore/zizmor-action@53290badfa369cb0bf7ad16342cb62c2fa47ac7b # v0.8.0
+        with:
+          version: 1.31.1
+          # Findings fail the job and show as annotations, without a code scanning upload that would
+          # need security-events: write.
+          advanced-security: false
+          annotations: true
