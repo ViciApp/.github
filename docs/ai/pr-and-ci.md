@@ -23,4 +23,4 @@ A Markdown-only change has no local gate.
 
 ## CI
 
-`.github/workflows/pr-checks.yml` runs this repository's own copy of the shared checks on every pull request and queue entry; `pr-checks / pass` is the status the org `baseline` ruleset requires. Merges go through the merge queue (squash), where `not-empty` runs again against whatever is queued ahead. `.github/workflows/lint.yml` runs actionlint and zizmor on every pull request and queue entry; it is not a required status, so read it before merging.
+`.github/workflows/pr-checks.yml` runs this repository's own copy of the shared checks on every pull request and queue entry; `pr-checks / pass` is the status the org `baseline` ruleset requires. Merges go through the merge queue (squash), where `not-empty` runs again against whatever is queued ahead. `.github/workflows/lint.yml` runs actionlint and zizmor on every pull request and queue entry; its `workflows` job is a required status, set in this repository's `merge-queue` ruleset.
